@@ -1,0 +1,23 @@
+# Virtual Environment
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Environment variables
+.env
+
+# Generated reports (optional)
+*.xlsx
+*.csv

@@ -1,0 +1,120 @@
+Website Content Auditor - Setup & Run Guide (Windows)
+Prerequisites
+
+Before running the project, install:
+
+Python 3.12.x (Recommended)
+Visual Studio Code (Optional)
+Git (Optional)
+Step 1: Open the Project
+
+Open PowerShell or Command Prompt.
+
+Navigate to the project folder.
+
+Example:
+
+cd "C:\Users\YourName\Downloads\website_content_auditor"
+Step 2: Create a Virtual Environment
+
+Run:
+
+python -m venv venv
+
+This creates a local Python environment.
+
+Step 3: Activate the Virtual Environment
+Windows PowerShell
+.\venv\Scripts\Activate.ps1
+
+If PowerShell blocks the script, run:
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+
+Then activate again:
+
+.\venv\Scripts\Activate.ps1
+
+When activated, you'll see:
+
+(venv) PS C:\...\website_content_auditor>
+Step 4: Install Dependencies
+
+Run:
+
+pip install -r requirements.txt
+
+Wait until all packages are installed successfully.
+
+Step 5: Run the Application
+
+Important: The project entry file is main.py, not app.py.
+
+Run:
+
+python main.py
+
+The Website Content Auditor window should now open.
+
+Common Errors
+Error
+can't open file 'app.py'
+Solution
+
+This project does not contain app.py.
+
+Run:
+
+python main.py
+
+instead.
+
+Error
+Python was not found
+Solution
+
+Install Python 3.12 and ensure "Add Python to PATH" is selected during installation.
+
+Error
+Running scripts is disabled on this system
+Solution
+
+Run:
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+
+Then activate the virtual environment again.
+
+Verify Python
+python --version
+
+Expected:
+
+Python 3.12.x
+Verify Virtual Environment
+
+You should see:
+
+(venv)
+
+before the PowerShell prompt.
+
+Install Dependencies Again (if needed)
+pip install -r requirements.txt
+Run the Project
+python main.py
+Project Structure
+website_content_auditor/
+│
+├── config/
+├── core/
+├── gui/
+├── venv/
+├── main.py
+├── requirements.txt
+├── README.md
+└── test_core.py
+Notes
+Use Python 3.12.x for best compatibility.
+Always activate the virtual environment before running the project.
+If you clone the project from Git, each developer should create their own venv. The venv folder should not be committed to Git.

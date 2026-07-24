@@ -1,0 +1,39 @@
+[
+  {"word": "Expert", "replacements": ["capable team", "dedicated team", "our team"]},
+  {"word": "Experts", "replacements": ["capable team", "dedicated team", "our team"]},
+  {"word": "Expertise", "replacements": ["experience", "knowledge", "capability"]},
+  {"word": "Expertly", "replacements": ["professionally", "carefully"]},
+
+  {"word": "Compliance", "replacements": ["approach", "process", "requirements"]},
+  {"word": "Compliant", "replacements": ["follows requirements", "meets standards"]},
+
+  {"word": "Reliable", "replacements": ["dependable", "prompt", "responsive", "consistent"]},
+
+  {"word": "Trained", "replacements": ["equipped"]},
+  {"word": "Training", "replacements": ["preparation"]},
+
+  {"word": "Skilled", "replacements": ["capable"]},
+  {"word": "Skills", "replacements": ["capabilities"]},
+
+  {"word": "Experienced", "replacements": ["our technicians"]},
+  {"word": "Experience", "replacements": ["our technicians"]},
+  {"word": "Years of experience", "replacements": ["extensive industry experience"]},
+
+  {"word": "Licensed", "replacements": ["service provider", "technicians", "company"]},
+  {"word": "Licence", "replacements": ["certification"]},
+
+  {"word": "Qualified", "replacements": ["ready to assist", "capable"]},
+
+  {"word": "Specialist", "replacements": ["dedicated"]},
+  {"word": "Specialising", "replacements": ["focused on"]},
+
+  {"word": "Knowledgeable", "replacements": ["our team"]},
+
+  {"word": "Long-lasting Results", "replacements": ["helps reduce future issues", "helps maintain"]},
+
+  {"word": "Promise", "replacements": ["aim to", "strive to", "work towards"]},
+
+  {"word": "Trusted", "replacements": ["preferred by customers", "dependable"]},
+
+  {"word": "Effective", "replacements": ["designed to help", "intended to reduce", "helps manage", "practical", "targeted", "suitable"]}
+]
