@@ -1,9 +1,20 @@
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Tkinter](https://img.shields.io/badge/GUI-Tkinter-green)
+![Requests](https://img.shields.io/badge/Requests-Web%20Scraping-orange)
+![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-HTML%20Parser-brightgreen)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-blueviolet)
+![OpenPyXL](https://img.shields.io/badge/OpenPyXL-Excel-success)
+
 # Website Content Auditor
 
 A desktop tool that crawls your WordPress websites, finds words/phrases you
 want to improve for SEO and content quality, suggests better alternatives,
 and exports everything to an Excel report — **it never edits your site**.
 You review the report and make changes manually.
+
+# Tech Stack
+`HTML` `Python` `XML` `Tkinter` `Requests` `BeautifulSoup4` `lxml` `Pandas` 
+`OpenPyXL` `Regex`  `Desktop GUI` `Web Scraping` `Excel Automation` 
 
 ## Quick start
 
