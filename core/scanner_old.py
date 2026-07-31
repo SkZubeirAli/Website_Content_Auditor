@@ -36,12 +36,7 @@ def _build_pattern(word_list):
             pattern = escaped
         else:
             pattern = escaped + r"(?:e?s)?"
-        # (?<![\w-]) / (?![\w-]) instead of \b: a plain \b treats a hyphen
-        # as a boundary just like a space, so "free" would still match
-        # inside "odour-free". Treating '-' as a "word" character here
-        # means "free" only matches when it's a standalone word, not part
-        # of a hyphenated compound.
-        parts.append(rf"(?P<w{idx}>(?<![\w-]){pattern}(?![\w-]))")
+        parts.append(rf"(?P<w{idx}>\b{pattern}\b)")
     combined = "|".join(parts)
     return re.compile(combined, re.IGNORECASE)
 
