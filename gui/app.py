@@ -72,6 +72,14 @@ class AuditorApp(ttk.Frame):
         ttk.Button(controls, text="Load Word List...", command=self._load_word_list).pack(
             side="left", padx=8)
 
+        self.case_sensitive_var = tk.BooleanVar(value=True)
+        self.case_sensitive_check = ttk.Checkbutton(
+            controls,
+            text="Case sensitive (\"Effective\" won't match \"effective\")",
+            variable=self.case_sensitive_var,
+        )
+        self.case_sensitive_check.pack(side="left", padx=8)
+
         self.export_btn = ttk.Button(controls, text="Export to Excel",
                                       command=self._export_excel, state="disabled")
         self.export_btn.pack(side="right", padx=4)
@@ -151,13 +159,17 @@ class AuditorApp(ttk.Frame):
         self.result_rows = []
         self.stop_event.clear()
         self.progress["value"] = 0
-        self.status_var.set("Starting...")
+        mode = "case-sensitive" if self.case_sensitive_var.get() else "case-insensitive"
+        self.status_var.set(f"Starting ({mode} matching)...")
         self.scanning = True
         self.start_btn.config(state="disabled")
         self.stop_btn.config(state="normal")
         self.export_btn.config(state="disabled")
+        self.case_sensitive_check.config(state="enabled")
 
-        self.worker_thread = threading.Thread(target=self._run_scan, args=(urls,), daemon=True)
+        self.worker_thread = threading.Thread(
+            target=self._run_scan, args=(urls, self.case_sensitive_var.get()), daemon=True
+        )
         self.worker_thread.start()
 
     def _stop_scan(self):
@@ -166,8 +178,8 @@ class AuditorApp(ttk.Frame):
         self.stop_btn.config(state="disabled")
 
     # ---- runs in a background thread ----
-    def _run_scan(self, urls):
-        scanner = WordScanner(self.word_list)
+    def _run_scan(self, urls, case_sensitive=True):
+        scanner = WordScanner(self.word_list, case_sensitive=case_sensitive)
         total_sites = len(urls)
 
         for site_idx, url in enumerate(urls, start=1):
@@ -238,6 +250,7 @@ class AuditorApp(ttk.Frame):
         self.start_btn.config(state="normal")
         self.stop_btn.config(state="disabled")
         self.export_btn.config(state="normal" if self.result_rows else "disabled")
+        self.case_sensitive_check.config(state="normal")
         self.progress["value"] = 100
 
     def _export_excel(self):

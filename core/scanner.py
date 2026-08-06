@@ -21,11 +21,17 @@ class Occurrence:
     sentence: str        # sentence/snippet containing the match
 
 
-def _build_pattern(word_list):
+def _build_pattern(word_list, case_sensitive=True):
     """Combine every word/phrase into one regex, longest phrase first, so
     e.g. "Years of experience" matches before the shorter "Experience".
     Single words get an optional trailing 's'/'es' so simple plurals are
-    caught even if a plural form wasn't listed explicitly."""
+    caught even if a plural form wasn't listed explicitly.
+
+    case_sensitive=False (default): "Effective" also matches "effective"
+    and "EFFECTIVE".
+    case_sensitive=True: "Effective" only matches that exact capitalisation
+    - "effective" and "EffectIve" are ignored entirely.
+    """
     entries = sorted(range(len(word_list)), key=lambda i: len(word_list[i]["word"]),
                       reverse=True)
     parts = []
@@ -43,23 +49,30 @@ def _build_pattern(word_list):
         # of a hyphenated compound.
         parts.append(rf"(?P<w{idx}>(?<![\w-]){pattern}(?![\w-]))")
     combined = "|".join(parts)
-    return re.compile(combined, re.IGNORECASE)
+    flags = 0 if case_sensitive else re.IGNORECASE
+    return re.compile(combined, flags)
 
 
 class WordScanner:
     """Reusable scanner built once from the loaded word list, then run
     against every crawled page's HTML."""
 
-    def __init__(self, word_list):
+    def __init__(self, word_list, case_sensitive=True):
         self.word_list = word_list
+        self.case_sensitive = case_sensitive
         self._by_index = {i: entry for i, entry in enumerate(word_list)}
         self._replacements_by_word = {
-            entry["word"].lower(): entry["replacements"] for entry in word_list
+            self._lookup_key(entry["word"]): entry["replacements"] for entry in word_list
         }
-        self.pattern = _build_pattern(word_list)
+        self.pattern = _build_pattern(word_list, case_sensitive)
+
+    def _lookup_key(self, word: str) -> str:
+        # In case-sensitive mode, "Effective" and "effective" are different
+        # entries and must not collide in the replacements lookup.
+        return word if self.case_sensitive else word.lower()
 
     def replacements_for(self, word: str):
-        return self._replacements_by_word.get(word.lower(), [])
+        return self._replacements_by_word.get(self._lookup_key(word), [])
 
     def scan_html(self, html: str):
         """Returns a list of Occurrence objects found in the page, in
